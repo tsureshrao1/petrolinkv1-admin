@@ -1,0 +1,26 @@
+<div class="container">
+    <h2 class="text-center">Add Career</h2>
+    <form>
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <input type="text" [(ngModel)]="career.role" placeholder="Role" 
+        name="role" class="form-control" id="role">
+      </div>
+    
+      <div class="form-group">
+        <label for="summary">Job Summary:</label>
+        <input [(ngModel)]="career.jobSummary" placeholder="Job Summary" 
+        name="summary" class="form-control" id="summary">
+      </div>
+
+      <div class="form-group">
+        <label for="jobDescription">JobDescription:</label>
+        <textarea [(ngModel)]="career.jobDescription" placeholder="JobDescription" 
+        name="jobDescription" class="form-control" id="jobDescription"></textarea>
+      </div>
+      
+    
+      <button class="btn btn-success" (click)="createCareer()">Create</button>
+      <p style="padding-top: 10px;" *ngIf="message != null">{{message}}</p>
+    </form>
+  </div>
