@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row table-responsive">
+        <h3 style="text-align: center;">Applicant Details</h3>
+        <p class="" style="text-align: center;color: red;padding-top: 20px;">{{message}}</p>
+        <table class="table table-bordered" *ngIf="applicant">
+            <tbody>
+                <tr>
+                    <td class="rowName">Applicant Name</td>
+                    <td>{{applicant.name}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Email Id</td>
+                    <td>{{applicant.email}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Phone Number</td>
+                    <td>{{applicant.phoneNumber}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Mobile Number</td>
+                    <td>{{applicant.mobileNumber}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Date of Birth</td>
+                    <td>{{applicant.dateOfbirth}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Nationality</td>
+                    <td>{{applicant.nationality}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Current Job Description</td>
+                    <td>{{applicant.describeCurrentJob}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Experience In Abroad</td>
+                    <td>{{applicant.expAbroad}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Experience In Others</td>
+                    <td>{{applicant.expOthers}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Qualification</td>
+                    <td>{{applicant.qualifications}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">When can he / she Join ?</td>
+                    <td>{{applicant.joiningPeriod}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Current Salary</td>
+                    <td>{{applicant.currentSalary}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Expected Salary</td>
+                    <td>{{applicant.expSalary}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Current Location</td>
+                    <td>{{applicant.presentLocation}}</td>
+                </tr>
+                <tr>
+                    <td class="rowName">Resume</td>
+                    <td><a href="#">Download Resume</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+          <img class="" style="text-align: center;" src="../../assets/loading.gif" />
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>
+
+<p>{{applicant.id}}</p>

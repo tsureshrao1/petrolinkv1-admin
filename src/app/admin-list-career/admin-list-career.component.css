@@ -28,3 +28,55 @@
 .numberLabel{
     text-align: center !important;
 }
+
+tr th{
+    text-align: center;
+}
+
+td a{
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+}
+.custom-pagination{
+    text-align: center;
+}
+.action{
+    padding: 10px 15px 10px 20px;
+}
+.action a{
+    margin: 10px;
+    color: #8dc63f;
+}
+
+td a:hover{
+    font-size: 15px;
+    color: green;
+}
+
+label{
+    font-weight: bold;
+}
+
+.remaining{
+    padding-top: 3px;
+    text-align: right;
+}
+
+.alert{
+    color: red;
+}
+
+.errorInput{
+    color: red;
+}
+
+.switch-large{
+    
+}
+
+.switch, .switch-large, .switch-labeled{
+    width: 130px !important;
+}
+
+.red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}

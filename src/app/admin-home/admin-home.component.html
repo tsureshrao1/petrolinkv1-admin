@@ -1,39 +1,34 @@
-<div class="container-fluid">
-    <div class="row title">
-      <h6 class="col-md-11">Petrolink Career Admin</h6>
-      <p class="col-md-1 btn btn-sm btn-danger" (click)="logOut()" style="cursor: pointer;margin: 0px;">Logout</p>
-    </div>
-    <div class="row">
-      <div class="col-md-2 leftNav">
-        <ul class="" style="list-style: none;color: cornsilk;" >
-          <li><a (click)="enableTemplate('addjob')">Post Job</a></li>
-          <li><a (click)="enableTemplate('getJobsList')">Jobs List</a></li>
-        </ul>
-      </div>
-      <div class="col-md-10" style="padding:30px">
-        <app-admin-add-career *ngIf="addCareer"></app-admin-add-career>
-        <app-admin-list-career *ngIf="careerList"></app-admin-list-career>
-      </div>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
+  <a class="navbar-brand" href="#"><strong>Petrolink Admin</strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" [ngClass]="{'active' : addCareer}">
+        <a (click)="enableTemplate('addjob')" class="nav-link">Post Job</a>
+      </li>
+      <li class="nav-item" [ngClass]="{'active' : careerList}">
+        <a (click)="enableTemplate('getJobsList')" class="nav-link">Jobs List</a>
+      </li>
+      <li class="nav-item" [ngClass]="{'active' : addUser}">
+        <a (click)="enableTemplate('addUser')" class="nav-link">Add User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-small btn-danger" style="color: #FFF !important;" href="#" (click)="logOut()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container-fluid" style="margin-top: 70px;">
+  <div class="row">
+    <div class="col-md-12">
+      <app-admin-add-career *ngIf="addCareer"></app-admin-add-career>
+      <app-admin-list-career *ngIf="careerList"></app-admin-list-career>
+      <app-admin-add-user *ngIf="addUser"></app-admin-add-user>
     </div>
   </div>
-  
-  
-  <style>
-    ul{
-      padding: 0px;
-    }
-    ul li{
-      padding: 10px;
-      border-bottom: 1px solid thistle;
-    }
-    ul li a{
-      cursor: pointer;
-    }
-    .title{
-      text-align: center; background-color: black;padding: 20px;color: cornsilk;
-      border-bottom: 1px solid thistle;
-    }
-    .leftNav{
-      height: 100vh;background-color: black;padding: 0px;
-    }
-  </style>
+</div>

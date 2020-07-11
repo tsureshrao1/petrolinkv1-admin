@@ -16,6 +16,8 @@ export class AdminCareerApplicantsComponent implements OnInit {
   message: String;
   careerId: any;
   blob: Blob;
+  config:any;
+  loading:boolean=false;
   constructor(private careerService:CareerAdminService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,19 +26,31 @@ export class AdminCareerApplicantsComponent implements OnInit {
   }
 
   loadApplicants(careerId){
+    this.loading = true;
     this.careerService.getApplicants(careerId).subscribe((data) => {
       if(data != null && data.length > 0){
         this.applicants = data;
+        this.config = {
+          itemsPerPage: 10,
+          currentPage: 1,
+          totalItems: this.applicants.length
+        };
         this.careers = null;
         this.message = null;
+        this.loading = false;
       }else{
         this.message = "No Applicants Found";
+        this.loading = false;
       }
     });
   }
 
   getApplicantsResume(applicant){
+    console.log(applicant);
+    console.log(this.careerId);
+    console.log(applicant.id);
     this.careerService.getResumeDownload(this.careerId,applicant.id).subscribe((datas) => {
+      console.log(datas);
       saveAs(new Blob([datas]));
       //this.blob = new Blob([datas]);
       //var downloadURL = window.URL.createObjectURL(datas);

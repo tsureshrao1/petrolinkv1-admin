@@ -10,13 +10,19 @@ import { career } from './model/career';
 export class CareerAdminService {
   HOST_NAME = "http://167.99.153.42:8080/petrolinkboot/";
   JOB_URL = "petrolink/career";
-  LOGIN = "petrolink/admin/user";
+  JOB_URL_DEACTIVATED = "petrolink/career/deactive";
+  LOGIN = "petrolink/admin/user/login";
   GET_APPLICATION = "petrolink/profile/career/";
   DOWNLOAD_FILE   = "petrolink/profile/download/";
+  ADD_ADMIN_USER = "petrolink/admin/user";
   constructor(private httpClient:HttpClient) { }
 
   login(data):Observable<any>{
     return this.httpClient.post<any>(this.HOST_NAME+this.LOGIN,data).pipe();
+  }
+
+  getDeactivatedJobs():Observable<any>{
+    return this.httpClient.get<career>(this.HOST_NAME+this.JOB_URL_DEACTIVATED).pipe();
   }
 
   getJopOpenings():Observable<any>{
@@ -25,6 +31,10 @@ export class CareerAdminService {
 
   createCareer(postJob){
     return this.httpClient.post<career>(this.HOST_NAME+this.JOB_URL,postJob).pipe();
+  }
+
+  updateCareer(updateJob){
+    return this.httpClient.put<career>(this.HOST_NAME+this.JOB_URL,updateJob).pipe();
   }
 
   deleteCareer(deleteJob){
@@ -40,6 +50,10 @@ export class CareerAdminService {
       responseType: 'blob' as 'json'
     }
     return this.httpClient.get<any>(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",httpOptions).pipe();
+  }
+
+  addAdminUser(user){
+    return this.httpClient.post<any>(this.HOST_NAME+this.ADD_ADMIN_USER,user).pipe();
   }
 
 }

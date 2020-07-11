@@ -1,0 +1,11 @@
+tr td{
+    text-transform: capitalize;
+}
+tr .rowName{
+    font-weight: bold;
+}
+
+h6{
+    text-align: left;
+    padding-top: 15px;
+}

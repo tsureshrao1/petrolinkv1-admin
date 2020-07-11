@@ -1,26 +1,39 @@
 <div class="container">
-    <h2 class="text-center">Add Career</h2>
+    <h2 class="text-center">Job Posting</h2>
     <form>
       <div class="form-group">
-        <label for="role">Role:</label>
+        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Role*:</label>
         <input type="text" [(ngModel)]="career.role" placeholder="Role" 
         name="role" class="form-control" id="role">
       </div>
     
       <div class="form-group">
-        <label for="summary">Job Summary:</label>
-        <input [(ngModel)]="career.jobSummary" placeholder="Job Summary" 
-        name="summary" class="form-control" id="summary">
+        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="summary">Job Summary*:</label>
+        <textarea [(ngModel)]="career.jobSummary" placeholder="Job Summary" 
+        name="summary" class="form-control" id="summary" maxlength="150"></textarea>
+        <p class="remaining" [ngClass]="{'alert' : career.jobSummary.length > 125}">{{150 - career.jobSummary.length}} Characters Remaining</p>
       </div>
 
       <div class="form-group">
-        <label for="jobDescription">JobDescription:</label>
-        <textarea [(ngModel)]="career.jobDescription" placeholder="JobDescription" 
-        name="jobDescription" class="form-control" id="jobDescription"></textarea>
+        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="jobDescription">Job Details*:</label>
+        <textarea [(ngModel)]="career.jobDescription" placeholder="Job Details" 
+        name="jobDescription" class="form-control" id="jobDescription" maxlength="1024"></textarea>
+        <p class="remaining" [ngClass]="{'alert' : career.jobDescription.length > 1000}">{{1024 - career.jobDescription.length}} Characters Remaining</p>
       </div>
-      
-    
-      <button class="btn btn-success" (click)="createCareer()">Create</button>
-      <p style="padding-top: 10px;" *ngIf="message != null">{{message}}</p>
+
+      <div class="form-group">
+        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="locality">Location*:</label>
+        <input [(ngModel)]="career.location" placeholder="Job Location" 
+        name="locality" class="form-control" id="locality">
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <button class="btn btn-success" (click)="createCareer()">Post Job</button>
+        </div>
+        <div class="col-md-10">
+          <p style="padding-top: 10px;color: seagreen;font-weight: bold;" *ngIf="message != null">{{message}}</p>
+          <p style="padding-top: 10px;color: red;" *ngIf="errorMessage != null">{{errorMessage}}</p>
+        </div>
+      </div>
     </form>
   </div>

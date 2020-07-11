@@ -3,4 +3,6 @@ export class career{
     role:string;
     jobSummary:String;
     jobDescription:String;
+    location:String;
+    status:boolean;
 }

@@ -1,0 +1,12 @@
+label{
+    font-weight: bold;
+}
+
+.remaining{
+    padding-top: 3px;
+    text-align: right;
+}
+
+.alert{
+    color: red;
+}

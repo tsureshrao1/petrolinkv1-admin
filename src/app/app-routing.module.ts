@@ -6,6 +6,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AuthGuard } from './auth.guard';
 import { AdminCareerApplicantsComponent } from './admin-career-applicants/admin-career-applicants.component';
+import { AdminCareerApplicantDetailsComponent } from './admin-career-applicant-details/admin-career-applicant-details.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'addjob',component:AdminAddCareerComponent,canActivate: [AuthGuard]},
   {path:'getJobsList',component:AdminListCareerComponent,canActivate: [AuthGuard]},
   {path:'getCareerApplicants/:id',component:AdminCareerApplicantsComponent,canActivate: [AuthGuard]},
+  {path:'getCareerApplicant/:careerId/:applicantId',component:AdminCareerApplicantDetailsComponent,canActivate: [AuthGuard]},
   {path:'',component:AdminLoginComponent},
   {path:'**',component:AdminLoginComponent}
 ];

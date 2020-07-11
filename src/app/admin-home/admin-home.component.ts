@@ -10,6 +10,7 @@ declare var $: any;
 export class AdminHomeComponent implements OnInit {
   addCareer:boolean=false;
   careerList:boolean=false;
+  addUser:boolean=false;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
@@ -30,9 +31,15 @@ export class AdminHomeComponent implements OnInit {
     if(divName=="addjob"){
       this.addCareer=true;
       this.careerList=false;
+      this.addUser=false;
     }else if(divName=="getJobsList"){
       this.addCareer=false;
       this.careerList=true;
+      this.addUser=false;
+    }else if(divName=="addUser"){
+      this.addCareer=false;
+      this.careerList=false;
+      this.addUser=true;
     }
   }
 

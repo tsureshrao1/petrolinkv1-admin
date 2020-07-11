@@ -1,47 +1,135 @@
-<p style="color: red;text-align: center;">{{message}}</p>
-<div class="container" *ngIf="careers">
-    <table class="table" border="1" style="margin-top: 50px;" >
-        <thead class="thead-dark">
+<div class="container-fluid">
+  <h2 style="text-align: center;">Job List</h2>
+  <div class="row" style="margin-bottom: 5px;">
+    <div class="col-md-10">
+      
+    </div>
+    <div class="col-md-2" style="padding:0px 30px 0px 0px">
+      <button class="btn btn-md btn-danger col-md-12" (click)="loadJobList('ifUnActive')" *ngIf="ifUnActive">Show Deactivated Jobs</button>
+      <button class="btn btn-md btn-success col-md-12" (click)="loadJobList('ifActive')" *ngIf="ifActive">Show Active Jobs</button>
+    </div>
+  </div>
+  <p class="" style="text-align: center;color: red;padding-top: 20px;">{{message}}</p>
+  <div class="row table-responsive" *ngIf="careers" style="margin-right: 0px;">
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <th>Id</th>
+          <th>Sl.No</th>
           <th>Role</th>
           <th>Job Summary</th>
-          <th>JobDescription</th>
+          <th>Job Details</th>
+          <th>Location</th>
           <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let career of careers | paginate: config">
-                <td>{{career.id}}</td>
-                <td>{{career.role}}</td>
-                <td>{{career.jobSummary}}</td>
-                <td>{{career.jobDescription}}</td>
-                <td>
-                  <button class="btn btn-sm btn-danger" (click)="deleteCareer(career)">Delete</button>
-                  <a class="btn btn-sm btn-success" [routerLink]="['/getCareerApplicants', career.id]">Applicants</a>
-                </td>
-            </tr>
-        </tbody>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let career of careers | paginate: config; let i = index">
+          <td>{{ (config.currentPage - 1) * config.itemsPerPage + i +1 }}</td>
+          <td>{{career.role}}</td>
+          <td>{{career.jobSummary.toString() | limitTo : "50" }}</td>
+          <td>{{career.jobDescription.toString() | limitTo : "50"}}</td>
+          <td>{{career.location}}</td>
+          <td class="action">
+            <a class="red-tooltip" data-toggle="tooltip" title="EDIT" data-toggle="modal" data-target="#Modal_Career_{{career.id}}" href="#Modal_Career_{{career.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+            <a *ngIf="ifActive" style="color: red;" (click)="deleteCareer(career)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a class="red-tooltip" data-toggle="tooltip" title="VIEW APPLICANTS" [routerLink]="['/getCareerApplicants', career.id]" target="_blank"><i class="fa fa-users" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+      </tbody>
     </table>
-    <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
-        <div class="custom-pagination">
-          <div class="pagination-previous" [class.disabled]="p.isFirstPage()" style="cursor: pointer;">
-            <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
-              <i class="fa fa-backward"></i>
-            </span> 
-            </div> 
-            <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
-                  <span class="numberLabel" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
-                <div *ngIf="p.getCurrent() === page.value">
-                  <span class="numberLabel">{{ page.label }}</span>
+    <div *ngFor="let career of careers">
+      <div class="modal fade" id="Modal_Career_{{career.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{career.role}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Role*:</label>
+                  <input type="text" [(ngModel)]="career.role" placeholder="Role" 
+                  name="role" class="form-control" id="role">
                 </div>
+              
+                <div class="form-group">
+                  <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="summary">Job Summary*:</label>
+                  <textarea [(ngModel)]="career.jobSummary" placeholder="Job Summary" 
+                  name="summary" class="form-control" id="summary" maxlength="150"></textarea>
+                  <p class="remaining" [ngClass]="{'alert' : career.jobSummary.length > 125}">{{150 - career.jobSummary.length}} Characters Remaining</p>
+                </div>
+          
+                <div class="form-group">
+                  <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="jobDescription">Job Details*:</label>
+                  <textarea [(ngModel)]="career.jobDescription" placeholder="Job Details" 
+                  name="jobDescription" class="form-control" id="jobDescription" maxlength="1024"></textarea>
+                  <p class="remaining" [ngClass]="{'alert' : career.jobDescription.length > 1000}">{{1024 - career.jobDescription.length}} Characters Remaining</p>
+                </div>
+          
+                <div class="form-group">
+                  <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="locality">Location*:</label>
+                  <input [(ngModel)]="career.location" placeholder="Job Location" 
+                  name="locality" class="form-control" id="locality">
+                </div>
+                <!--<ui-switch labelOn="Active" labelOff="Non-Active" size="large"></ui-switch>-->
+                <div class="form-group">
+                  <label for="status">Job Status</label>
+                  <select [(ngModel)]="career.status" name="status" class="form-control" id="status">
+                    <option value="false">Deactive</option>
+                    <option value="true">Activate</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p style="padding-top: 10px;color: seagreen;font-weight: bold;" *ngIf="message">{{message}}</p>
+                    <p style="padding-top: 10px;color: red;" *ngIf="errorMessage">{{errorMessage}}</p>
+                  </div>
+                  <div class="col-md-12">
+                    <button class="btn btn-success col-md-12" (click)="updateCareer(career)">Update Job</button>
+                  </div>
+                  <!--<div class="col-md-6">
+                    <button class="btn btn-danger col-md-12" (click)="deleteCareer(career)">Delete Job</button>
+                  </div>-->
+                </div>
+              </form>
             </div>
-            <div class="pagination-next" [class.disabled]="p.isLastPage()" style="cursor: pointer;">
-              <span *ngIf="!p.isLastPage()" (click)="p.next()"> 
-                <i class="fa fa-forward"></i>
-              </span>
-            </div>
+            <!--<div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>-->
+          </div>
         </div>
-    
+      </div>
+    </div>
+    <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+      <div class="custom-pagination">
+        <div class="pagination-previous" [class.disabled]="p.isFirstPage()" style="cursor: pointer;">
+          <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+            <i class="fa fa-backward"></i>
+          </span> 
+          </div> 
+          <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                <span class="numberLabel" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+              <div *ngIf="p.getCurrent() === page.value">
+                <span class="numberLabel">{{ page.label }}</span>
+              </div>
+          </div>
+          <div class="pagination-next" [class.disabled]="p.isLastPage()" style="cursor: pointer;">
+            <span *ngIf="!p.isLastPage()" (click)="p.next()"> 
+              <i class="fa fa-forward"></i>
+            </span>
+          </div>
+      </div>
     </pagination-template>
+  </div>
+  <div class="row" *ngIf="loading">
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+      <img class="" style="text-align: center;" src="../../assets/loading.gif" />
+    </div>
+    <div class="col-md-5"></div>
+  </div>
 </div>
