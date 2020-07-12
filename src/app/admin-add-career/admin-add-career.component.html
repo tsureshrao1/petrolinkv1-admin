@@ -10,15 +10,15 @@
       <div class="form-group">
         <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="summary">Job Summary*:</label>
         <textarea [(ngModel)]="career.jobSummary" placeholder="Job Summary" 
-        name="summary" class="form-control" id="summary" maxlength="150"></textarea>
-        <p class="remaining" [ngClass]="{'alert' : career.jobSummary.length > 125}">{{150 - career.jobSummary.length}} Characters Remaining</p>
+        name="summary" class="form-control" id="summary" maxlength="250"></textarea>
+        <p class="remaining" [ngClass]="{'alert' : career.jobSummary.length > 225}">{{250 - career.jobSummary.length}} Characters Remaining</p>
       </div>
 
       <div class="form-group">
         <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="jobDescription">Job Details*:</label>
         <textarea [(ngModel)]="career.jobDescription" placeholder="Job Details" 
-        name="jobDescription" class="form-control" id="jobDescription" maxlength="1024"></textarea>
-        <p class="remaining" [ngClass]="{'alert' : career.jobDescription.length > 1000}">{{1024 - career.jobDescription.length}} Characters Remaining</p>
+        name="jobDescription" class="form-control" id="jobDescription" maxlength="1000"></textarea>
+        <p class="remaining" [ngClass]="{'alert' : career.jobDescription.length > 975}">{{1000 - career.jobDescription.length}} Characters Remaining</p>
       </div>
 
       <div class="form-group">
