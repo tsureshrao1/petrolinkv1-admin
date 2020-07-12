@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CareerAdminService } from '../career-admin.service';
 import { Router } from '@angular/router';
+import { AdminHeaderNavComponent } from '../admin-header-nav/admin-header-nav.component';
 
 @Component({
   selector: 'app-admin-login',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class AdminLoginComponent implements OnInit {
 
   loginData:user;
+  message:String;
 
   constructor(private careerService:CareerAdminService,private router:Router) {
     this.loginData = new user();
@@ -21,9 +23,13 @@ export class AdminLoginComponent implements OnInit {
 
   login(){
     this.careerService.login(this.loginData).subscribe((data) => {
-      data.password = "*********";
-      localStorage.setItem("currentUser",JSON.stringify(data));
-      this.router.navigate(["/addjob"]);
+      if(data != null){
+        data.password = "*********";
+        localStorage.setItem("currentUser",JSON.stringify(data));
+        this.router.navigate(["/addjob"]);
+      }else{
+        this.message = "Login Issue";
+      }
     });
   }
 

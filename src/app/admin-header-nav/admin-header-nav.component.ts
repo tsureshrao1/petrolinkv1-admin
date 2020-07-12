@@ -12,9 +12,17 @@ export class AdminHeaderNavComponent implements OnInit {
   careerList:boolean=false;
   addUser:boolean=false;
 
-  constructor(private router:Router) { }
+  loggedOut:boolean=false;
+
+  constructor(private router:Router) { 
+    console.log(localStorage.getItem('currentUser'));
+    /*if(localStorage.getItem('currentUser') == null){
+      this.loggedOut = true;
+    }*/
+  }
 
   ngOnInit(): void {
+    
   }
 
   logOut(){

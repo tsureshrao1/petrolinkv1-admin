@@ -104,7 +104,12 @@ export class AdminListCareerComponent implements OnInit {
     }else{
       this.careerService.updateCareer(career).subscribe( data => {
         this.message = "Updated Job Successfully";
-        this.getJobOpenings();
+        //this.getJobOpenings();
+        if(this.ifActive == true){
+          this.loadJobList('ifUnActive');
+        }else if(this.ifUnActive == true){
+          this.loadJobList('ifActive');
+        }
         this.errorMessage="";
         this.message = "";
       });

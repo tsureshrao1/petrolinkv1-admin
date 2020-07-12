@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
-    <a class="navbar-brand" href="#"><strong>Petrolink Admin</strong></a>
+    <p class="navbar-brand" style="margin: 0px;"><strong>Petrolink Admin</strong></p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" [ngClass]="{'active' : addCareer}">
-          <a routerLink="/addjob" class="nav-link">Post Job</a>
+          <a routerLink="/addjob" class="nav-link" routerLinkActive="active-link">Post Job</a>
         </li>
         <li class="nav-item" [ngClass]="{'active' : careerList}">
-          <a href="/jobList" class="nav-link">Jobs List</a>
+          <a routerLink="/jobList" class="nav-link" routerLinkActive="active-link">Jobs List</a>
         </li>
         <li class="nav-item" [ngClass]="{'active' : addUser}">
-          <a href="/addUser" class="nav-link">Add User</a>
+          <a routerLink="/addUser" class="nav-link" routerLinkActive="active-link">Add User</a>
         </li>
         <li class="nav-item">
           <a class="nav-link btn btn-small btn-danger" style="color: #FFF !important;" href="#" (click)="logOut()">Logout</a>

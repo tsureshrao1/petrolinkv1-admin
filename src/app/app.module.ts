@@ -37,9 +37,9 @@ import { AdminHeaderNavComponent } from './admin-header-nav/admin-header-nav.com
     FormsModule,
     AppRoutingModule,
     NgxPaginationModule,
-    UiSwitchModule
+    UiSwitchModule,
   ],
-  providers: [],
+  providers: [AdminHeaderNavComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
