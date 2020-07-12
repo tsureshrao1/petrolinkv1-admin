@@ -70,6 +70,7 @@ export class AdminListCareerComponent implements OnInit {
         };
         this.loading = false;
       }else{
+        this.careers = null;
         this.message = "No Jobs Found"
         this.loading = false;
       }
