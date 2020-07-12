@@ -48,14 +48,15 @@ export class AdminListCareerComponent implements OnInit {
   }
 
   deleteCareer(career){
-    console.log(career.id);
+    let careerIdLocal = career.id;
     this.careerService.deleteCareer(career).subscribe( data => {
       this.getJobOpenings();
-      $("#Modal_Career_"+career.id).modal("hide");
+      $("#deleteConfirmation_"+careerIdLocal).modal("hide");
     });
   }
 
   getJobOpenings(){
+    this.message = ""
     this.loading = true;
     this.careerService.getJopOpenings().subscribe((data) => {
       this.careers = data;
@@ -74,6 +75,7 @@ export class AdminListCareerComponent implements OnInit {
   }
 
   getDeactivatedJobs(){
+    this.message = ""
     this.loading = true;
     this.careerService.getDeactivatedJobs().subscribe((data) => {
       this.careers = data;
@@ -87,6 +89,7 @@ export class AdminListCareerComponent implements OnInit {
       }else{
         this.loading = false;
         this.message = "No Jobs Found."
+        this.careers = null;
       }
     });
   }
@@ -104,6 +107,10 @@ export class AdminListCareerComponent implements OnInit {
       });
       $("#Modal_Career_"+career.id).modal("hide");
     }
+  }
+
+  removeModal(career){
+    $("#deleteConfirmation_"+career.id).modal("hide");
   }
 }
 

@@ -27,7 +27,7 @@ export class AdminAddUserComponent implements OnInit {
   }
 
   createUser(){
-    if(this.user.userName == '' || this.user.password == '' || this.user.email == ''){
+    if(this.user.userName == '' || this.user.password == ''){
       console.log(this.user);
       this.errorMessage = "Please Fill all the fields*"
     }else if(this.user.userName.length < 5){

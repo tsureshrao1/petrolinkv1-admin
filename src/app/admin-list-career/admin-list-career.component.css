@@ -30,23 +30,22 @@
 }
 
 tr th{
-    text-align: center;
+    
 }
 
 td a{
     cursor: pointer;
     font-size: 14px;
-    margin: 5px;
 }
 .custom-pagination{
     text-align: center;
 }
 .action{
-    padding: 10px 15px 10px 20px;
+    padding: 10px 10px 10px 10px;
 }
 .action a{
-    margin: 10px;
     color: #8dc63f;
+    margin: 3px;
 }
 
 td a:hover{

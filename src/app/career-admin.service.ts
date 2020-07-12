@@ -49,6 +49,7 @@ export class CareerAdminService {
     const httpOptions = {
       responseType: 'blob' as 'json'
     }
+    console.log(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_");
     return this.httpClient.get<any>(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",httpOptions).pipe();
   }
 

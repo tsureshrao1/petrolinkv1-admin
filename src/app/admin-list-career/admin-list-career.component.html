@@ -31,7 +31,7 @@
           <td>{{career.location}}</td>
           <td class="action">
             <a class="red-tooltip" data-toggle="tooltip" title="EDIT" data-toggle="modal" data-target="#Modal_Career_{{career.id}}" href="#Modal_Career_{{career.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-            <a *ngIf="ifActive" style="color: red;" (click)="deleteCareer(career)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <a *ngIf="ifActive" style="color: red;" data-toggle="modal" data-target="#deleteConfirmation_{{career.id}}" href="#deleteConfirmation_{{career.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
             <a class="red-tooltip" data-toggle="tooltip" title="VIEW APPLICANTS" [routerLink]="['/getCareerApplicants', career.id]" target="_blank"><i class="fa fa-users" aria-hidden="true"></i></a>
           </td>
         </tr>
@@ -103,6 +103,25 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="deleteConfirmation_{{career.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Job Delete Confirmation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              While doing this below <i>Delete</i> option, will remove applications too for this job.
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" (click)="deleteCareer(career)">Delete</button>
+              <button class="btn btn-success" (click)="removeModal(career)">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
       <div class="custom-pagination">
@@ -124,7 +143,7 @@
           </div>
       </div>
     </pagination-template>
-  </div>
+    
   <div class="row" *ngIf="loading">
     <div class="col-md-5"></div>
     <div class="col-md-2">
