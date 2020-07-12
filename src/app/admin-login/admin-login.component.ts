@@ -23,7 +23,7 @@ export class AdminLoginComponent implements OnInit {
     this.careerService.login(this.loginData).subscribe((data) => {
       data.password = "*********";
       localStorage.setItem("currentUser",JSON.stringify(data));
-      this.router.navigate(["/adminhome"]);
+      this.router.navigate(["/addjob"]);
     });
   }
 

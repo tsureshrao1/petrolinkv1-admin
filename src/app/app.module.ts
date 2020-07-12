@@ -15,6 +15,7 @@ import { AdminCareerApplicantsComponent } from './admin-career-applicants/admin-
 import { TruncatePipe } from './app.pipe';
 import { AdminCareerApplicantDetailsComponent } from './admin-career-applicant-details/admin-career-applicant-details.component';
 import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component';
+import { AdminHeaderNavComponent } from './admin-header-nav/admin-header-nav.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component
     AdminCareerApplicantsComponent,
     TruncatePipe,
     AdminCareerApplicantDetailsComponent,
-    AdminAddUserComponent
+    AdminAddUserComponent,
+    AdminHeaderNavComponent
   ],
   imports: [
     BrowserModule,

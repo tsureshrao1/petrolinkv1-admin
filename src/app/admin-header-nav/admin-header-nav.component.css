@@ -1,0 +1,13 @@
+.active{
+    font-weight: bold;
+    border-bottom: 2px solid #FFF;
+    box-shadow: 0px 0px 0px #FFF;
+}
+nav{
+    box-shadow: 0px 0px 5px #DEDEDE;
+    background-color: seagreen;
+}
+a{
+    color: #FFF !important;
+    cursor: pointer;
+}

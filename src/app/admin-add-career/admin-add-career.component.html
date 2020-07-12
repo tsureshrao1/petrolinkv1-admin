@@ -1,4 +1,6 @@
-<div class="container">
+<app-admin-header-nav></app-admin-header-nav>
+
+<div class="container pageDiv">
     <h2 class="text-center">Job Posting</h2>
     <form>
       <div class="form-group">
@@ -31,8 +33,8 @@
           <button class="btn btn-success" (click)="createCareer()">Post Job</button>
         </div>
         <div class="col-md-10">
-          <p style="padding-top: 10px;color: seagreen;font-weight: bold;" *ngIf="message != null">{{message}}</p>
-          <p style="padding-top: 10px;color: red;" *ngIf="errorMessage != null">{{errorMessage}}</p>
+          <p style="padding-top: 10px;color: seagreen;font-weight: bold;margin: 0px;" *ngIf="message != null">{{message}}</p>
+          <p style="padding-top: 10px;color: red;margin: 0px;" *ngIf="errorMessage != null">{{errorMessage}}</p>
         </div>
       </div>
     </form>

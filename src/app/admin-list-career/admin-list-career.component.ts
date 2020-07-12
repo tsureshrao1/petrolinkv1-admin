@@ -50,7 +50,9 @@ export class AdminListCareerComponent implements OnInit {
   deleteCareer(career){
     let careerIdLocal = career.id;
     this.careerService.deleteCareer(career).subscribe( data => {
-      this.getJobOpenings();
+      this.ifActive = true;
+      this.ifUnActive = false;
+      this.getDeactivatedJobs();
       $("#deleteConfirmation_"+careerIdLocal).modal("hide");
     });
   }

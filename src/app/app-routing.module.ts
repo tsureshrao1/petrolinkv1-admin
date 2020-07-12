@@ -7,11 +7,14 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AuthGuard } from './auth.guard';
 import { AdminCareerApplicantsComponent } from './admin-career-applicants/admin-career-applicants.component';
 import { AdminCareerApplicantDetailsComponent } from './admin-career-applicant-details/admin-career-applicant-details.component';
+import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component';
 
 
 const routes: Routes = [
+  {path:'jobList',component:AdminListCareerComponent,canActivate: [AuthGuard]},
   {path:'adminhome',component:AdminHomeComponent,canActivate: [AuthGuard]},
   {path:'addjob',component:AdminAddCareerComponent,canActivate: [AuthGuard]},
+  {path:'addUser',component:AdminAddUserComponent,canActivate: [AuthGuard]},
   {path:'getJobsList',component:AdminListCareerComponent,canActivate: [AuthGuard]},
   {path:'getCareerApplicants/:id',component:AdminCareerApplicantsComponent,canActivate: [AuthGuard]},
   {path:'getCareerApplicant/:careerId/:applicantId',component:AdminCareerApplicantDetailsComponent,canActivate: [AuthGuard]},

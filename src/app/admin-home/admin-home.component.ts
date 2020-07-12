@@ -21,26 +21,4 @@ export class AdminHomeComponent implements OnInit {
 			});
     });
   }
-
-  logOut(){
-    localStorage.removeItem("currentUser");
-    this.router.navigate(["/"])
-  }
-
-  enableTemplate(divName){
-    if(divName=="addjob"){
-      this.addCareer=true;
-      this.careerList=false;
-      this.addUser=false;
-    }else if(divName=="getJobsList"){
-      this.addCareer=false;
-      this.careerList=true;
-      this.addUser=false;
-    }else if(divName=="addUser"){
-      this.addCareer=false;
-      this.careerList=false;
-      this.addUser=true;
-    }
-  }
-
 }
