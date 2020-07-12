@@ -79,3 +79,7 @@ label{
 }
 
 .red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
+
+.modal-body h6{
+    text-decoration: underline;    
+}
