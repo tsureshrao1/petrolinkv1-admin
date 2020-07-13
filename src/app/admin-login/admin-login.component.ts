@@ -26,7 +26,7 @@ export class AdminLoginComponent implements OnInit {
       if(data != null){
         data.password = "*********";
         localStorage.setItem("currentUser",JSON.stringify(data));
-        this.router.navigate(["/addjob"]);
+        this.router.navigate(["addjob"]);
       }else{
         this.message = "Login Issue";
       }

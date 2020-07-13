@@ -27,7 +27,7 @@ export class AdminHeaderNavComponent implements OnInit {
 
   logOut(){
     localStorage.removeItem("currentUser");
-    this.router.navigate(["/"])
+    this.router.navigate([""])
   }
 
   enableTemplate(divName){
