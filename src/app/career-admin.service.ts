@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { career } from './model/career';
 
 @Injectable({
@@ -47,10 +47,14 @@ export class CareerAdminService {
 
   getResumeDownload(careerId,applicantId){
     const httpOptions = {
-      responseType: 'blob' as 'json'
+      responseType: 'blob' as 'json',
     }
     console.log(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_");
-    return this.httpClient.get<any>(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",httpOptions).pipe();
+    /*this.httpClient.get(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",{observe: 'response', responseType: 'blob'}).subscribe(resp => {
+      console.log(resp.headers.get('Content-Disposition'));
+      console.log(resp);
+    });*/
+    return this.httpClient.get(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",{observe: 'response', responseType: 'blob'});
   }
 
   addAdminUser(user){

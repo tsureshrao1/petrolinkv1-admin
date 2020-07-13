@@ -46,16 +46,23 @@ export class AdminCareerApplicantsComponent implements OnInit {
   }
 
   getApplicantsResume(applicant){
-    console.log(applicant);
-    console.log(this.careerId);
-    console.log(applicant.id);
+    let fileName:string = null;
+    let contentDisposition = null;
+    //this.careerService.getResumeDownload(this.careerId,applicant.id);
     this.careerService.getResumeDownload(this.careerId,applicant.id).subscribe((datas) => {
-      console.log(datas);
-      saveAs(new Blob([datas]));
-      //this.blob = new Blob([datas]);
-      //var downloadURL = window.URL.createObjectURL(datas);
-      //console.log(downloadURL);
-      //applicant.downloadLink = downloadURL;
+
+      if(datas != null && datas.body != null && datas.headers != null){
+        contentDisposition = datas.headers.get('Content-Disposition');
+        if(contentDisposition == null){
+          contentDisposition = 'attachment; filename="Resume.docx"';
+        }
+        contentDisposition = contentDisposition.substr(contentDisposition.lastIndexOf(';')+1)
+        fileName = contentDisposition.substr(contentDisposition.lastIndexOf('=')+1)
+        fileName = fileName.replace(/^"|"$/g, '');
+        const EXT = fileName.substr(fileName.lastIndexOf('.')+1);
+        console.log(EXT);
+        saveAs(new Blob([datas.body],{type:EXT}),fileName);
+      }
     });
   }
 
