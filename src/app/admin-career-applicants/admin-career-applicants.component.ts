@@ -18,6 +18,7 @@ export class AdminCareerApplicantsComponent implements OnInit {
   blob: Blob;
   config:any;
   loading:boolean=false;
+  filterText:any='';
   constructor(private careerService:CareerAdminService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {

@@ -34,7 +34,7 @@
             <a data-toggle="tooltip" title="View Job Details" data-toggle="modal" data-target="#Modal_Career_Details{{career.id}}" href="#Modal_Career_Details{{career.id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
             <a class="red-tooltip" data-toggle="tooltip" title="EDIT" data-toggle="modal" data-target="#Modal_Career_{{career.id}}" href="#Modal_Career_{{career.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
             <a *ngIf="ifActive" style="color: red;" data-toggle="modal" data-target="#deleteConfirmation_{{career.id}}" href="#deleteConfirmation_{{career.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            <a class="red-tooltip" data-toggle="tooltip" title="VIEW APPLICANTS" [routerLink]="['/getCareerApplicants', career.id]" target="_blank"><i class="fa fa-users" aria-hidden="true"></i></a>
+            <a class="red-tooltip" data-toggle="tooltip" title="VIEW APPLICANTS" [routerLink]="['/getCareerApplicants', career.id]"><i class="fa fa-users" aria-hidden="true"></i></a>
           </td>
         </tr>
       </tbody>

@@ -63,7 +63,8 @@
                 </tr>
                 <tr>
                     <td class="rowName">Resume</td>
-                    <td><a href="#">Download Resume</a></td>
+                    <td><a (click)='downloadResume()'>Download Resume</a>
+                    <img *ngIf="downloading" style="width: 30px;height: 30px;color: red;" src="./../assets/loading.gif"></td>
                 </tr>
             </tbody>
         </table>
@@ -71,10 +72,15 @@
     <div class="row" *ngIf="loading">
         <div class="col-md-5"></div>
         <div class="col-md-2">
-          <img class="" style="text-align: center;" src="../../assets/loading.gif" />
+          <img class="" style="text-align: center;" src="./../assets/loading.gif" />
         </div>
         <div class="col-md-5"></div>
     </div>
 </div>
-
-<p>{{applicant.id}}</p>
+<style>
+a{
+    text-decoration: underline;
+    cursor: pointer;
+    color: green;
+}
+</style>
