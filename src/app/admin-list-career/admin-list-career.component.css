@@ -29,10 +29,6 @@
     text-align: center !important;
 }
 
-tr th{
-    
-}
-
 td a{
     cursor: pointer;
     font-size: 14px;
@@ -68,10 +64,6 @@ label{
 
 .errorInput{
     color: red;
-}
-
-.switch-large{
-    
 }
 
 .switch, .switch-large, .switch-labeled{
