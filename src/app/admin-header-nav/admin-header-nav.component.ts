@@ -11,6 +11,7 @@ export class AdminHeaderNavComponent implements OnInit {
   addCareer:boolean=false;
   careerList:boolean=false;
   addUser:boolean=false;
+  directApplicants:boolean=false;
 
   loggedOut:boolean=false;
 
@@ -39,6 +40,11 @@ export class AdminHeaderNavComponent implements OnInit {
       this.addCareer=false;
       this.careerList=true;
       this.addUser=false;
+    }else if(divName=="directApplicants"){
+      this.addCareer=false;
+      this.careerList=false;
+      this.addUser=false;
+      this.directApplicants = true;
     }else if(divName=="addUser"){
       this.addCareer=false;
       this.careerList=false;

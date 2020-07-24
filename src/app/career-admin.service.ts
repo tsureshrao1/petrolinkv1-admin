@@ -15,6 +15,8 @@ export class CareerAdminService {
   GET_APPLICATION = "petrolink/profile/career/";
   DOWNLOAD_FILE   = "petrolink/profile/download/";
   ADD_ADMIN_USER = "petrolink/admin/user";
+  DIRECT_PROFILE_GET   = "petrolink/directProfile";
+  DIRECT_PROFILE_DELETE   = "petrolink/directProfile";
   constructor(private httpClient:HttpClient) { }
 
   login(data):Observable<any>{
@@ -45,6 +47,14 @@ export class CareerAdminService {
     return this.httpClient.get<any>(this.HOST_NAME+this.GET_APPLICATION+careerId);
   }
 
+  getDirectApplicants(){
+    return this.httpClient.get<any>(this.HOST_NAME+this.DIRECT_PROFILE_GET);
+  }
+
+  deleteDirectProfile(deleteJob){
+    return this.httpClient.delete<career>(this.HOST_NAME+this.DIRECT_PROFILE_DELETE+"/"+ deleteJob.id);
+  }
+
   getResumeDownload(careerId,applicantId){
     const httpOptions = {
       responseType: 'blob' as 'json',
@@ -55,6 +65,18 @@ export class CareerAdminService {
       console.log(resp);
     });*/
     return this.httpClient.get(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",{observe: 'response', responseType: 'blob'});
+  }
+
+  getDirectResumeDownload(applicantId){
+    const httpOptions = {
+      responseType: 'blob' as 'json',
+    }
+    console.log(this.HOST_NAME+this.DOWNLOAD_FILE+"DP_"+applicantId+"_");
+    /*this.httpClient.get(this.HOST_NAME+this.DOWNLOAD_FILE+"P_"+careerId+"_"+applicantId+"_",{observe: 'response', responseType: 'blob'}).subscribe(resp => {
+      console.log(resp.headers.get('Content-Disposition'));
+      console.log(resp);
+    });*/
+    return this.httpClient.get(this.HOST_NAME+this.DOWNLOAD_FILE+"DP_"+applicantId+"_",{observe: 'response', responseType: 'blob'});
   }
 
   addAdminUser(user){

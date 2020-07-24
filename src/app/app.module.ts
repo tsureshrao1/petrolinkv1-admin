@@ -17,6 +17,8 @@ import { AdminCareerApplicantDetailsComponent } from './admin-career-applicant-d
 import { AdminAddUserComponent } from './admin-add-user/admin-add-user.component';
 import { AdminHeaderNavComponent } from './admin-header-nav/admin-header-nav.component';
 import { ApplicantFilterPipe } from './applicant-filter.pipe';
+import { AdminDirectApplicantsComponent } from './admin-direct-applicants/admin-direct-applicants.component';
+import { AdminDirectApplicantDetailComponent } from './admin-direct-applicant-detail/admin-direct-applicant-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ApplicantFilterPipe } from './applicant-filter.pipe';
     AdminCareerApplicantDetailsComponent,
     AdminAddUserComponent,
     AdminHeaderNavComponent,
-    ApplicantFilterPipe
+    ApplicantFilterPipe,
+    AdminDirectApplicantsComponent,
+    AdminDirectApplicantDetailComponent
   ],
   imports: [
     BrowserModule,

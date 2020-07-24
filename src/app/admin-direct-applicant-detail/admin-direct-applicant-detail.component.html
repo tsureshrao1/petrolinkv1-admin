@@ -2,7 +2,6 @@
 <div class="container pageDiv">
     <div class="row table-responsive">
         <h3 style="text-align: center;">Applicant Details</h3>
-        <p class="" style="text-align: center;color: red;padding-top: 20px;">{{message}}</p>
         <table class="table table-bordered" *ngIf="applicant">
             <tbody>
                 <tr>
@@ -61,21 +60,21 @@
                     <td class="rowName">Current Location</td>
                     <td>{{applicant.presentLocation}}</td>
                 </tr>
-                <tr>
+             <!--   <tr>
                     <td class="rowName">Resume</td>
                     <td><a (click)='downloadResume()'>Download Resume</a>
                     <img *ngIf="downloading" style="width: 30px;height: 30px;color: red;" src="./../assets/loading.gif"></td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>
-    <div class="row" *ngIf="loading">
+    <!--<div class="row" *ngIf="loading">
         <div class="col-md-5"></div>
         <div class="col-md-2">
           <img class="" style="text-align: center;" src="./../assets/loading.gif" />
         </div>
         <div class="col-md-5"></div>
-    </div>
+    </div> -->
 </div>
 <style>
 a{
@@ -86,3 +85,4 @@ a{
 
 
 </style>
+

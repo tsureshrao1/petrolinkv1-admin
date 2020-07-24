@@ -11,6 +11,7 @@ export class AdminHomeComponent implements OnInit {
   addCareer:boolean=false;
   careerList:boolean=false;
   addUser:boolean=false;
+  directApplicants:boolean=false;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
