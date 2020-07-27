@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:'addUser',component:AdminAddUserComponent,canActivate: [AuthGuard]},
   {path:'getJobsList',component:AdminListCareerComponent,canActivate: [AuthGuard]},
   {path:'directApplicants',component:AdminDirectApplicantsComponent,canActivate: [AuthGuard]},
-  {path:'getDirectApplicant/:applicant',component:AdminDirectApplicantDetailComponent,canActivate: [AuthGuard]},
+  {path:'getDirectApplicant/:applicantId',component:AdminDirectApplicantDetailComponent,canActivate: [AuthGuard]},
   {path:'getCareerApplicants/:id',component:AdminCareerApplicantsComponent,canActivate: [AuthGuard]},
   {path:'getCareerApplicant/:careerId/:applicantId',component:AdminCareerApplicantDetailsComponent,canActivate: [AuthGuard]},
   {path:'',component:AdminLoginComponent},

@@ -47,9 +47,30 @@
                     <td>{{applicant.qualifications}}</td>
                     <td>{{applicant.joiningPeriod}}</td>
                     <td>
-                      <!--<a data-toggle="tooltip" title="View Applicant Details" [routerLink]="['/getDirectApplicant', applicant]"><i class="fa fa-wpforms" aria-hidden="true"></i></a> -->
+                      <a data-toggle="tooltip" title="View Applicant Details" [routerLink]="['/getDirectApplicant', applicant.id]"><i class="fa fa-wpforms" aria-hidden="true"></i></a>
                        <a data-toggle="tooltip" title="Download Resume" (click)="getApplicantsResume(applicant)"><i class="fa fa-download" aria-hidden="true"></i></a>
+                       <a style="color: red;" data-toggle="modal" data-target="#deleteConfirmationDirect_{{applicant.id}}" href="#deleteConfirmationDirect_{{applicant.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
+                    <div class="modal fade" id="deleteConfirmationDirect_{{applicant.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Job Delete Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            While doing this below <i>Delete</i> option, will remove applications too for this job.
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-danger" (click)="deleteProfile(applicant.id)">Delete</button>
+                            <button class="btn btn-success" (click)="removeModal(applicant.id)">No</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
                 </tr>
             </tbody>
         </table>
@@ -83,6 +104,9 @@
       
     </div>
 </div>
+
+
+
 <style>
 a{
     margin:5px;

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CareerAdminService } from '../career-admin.service';
 import { career } from '../model/career';
 import { saveAs } from 'file-saver';
+declare var $: any;
 
 @Component({
   selector: 'app-admin-direct-applicants',
@@ -63,6 +64,20 @@ export class AdminDirectApplicantsComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  deleteProfile(applicantId){
+    
+    this.careerService.deleteDirectProfile(applicantId).subscribe( data => {
+      this.applicants = null;
+      this.loadApplicants();
+      $("#deleteConfirmationDirect_"+applicantId).modal("hide");
+      
+    });
+  }
+
+  removeModal(applicantId){
+    $("#deleteConfirmationDirect_"+applicantId).modal("hide");
   }
 
   getApplicantsResume(applicant){

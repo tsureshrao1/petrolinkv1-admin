@@ -8,14 +8,16 @@ import { career } from './model/career';
 })
 
 export class CareerAdminService {
-  HOST_NAME = "http://167.99.153.42:8080/petrolinkboot/";
+  //HOST_NAME = "http://167.99.153.42:8080/petrolinkboot/";
+  HOST_NAME = "http://localhost:9090/";
   JOB_URL = "petrolink/career";
   JOB_URL_DEACTIVATED = "petrolink/career/deactive";
   LOGIN = "petrolink/admin/user/login";
   GET_APPLICATION = "petrolink/profile/career/";
   DOWNLOAD_FILE   = "petrolink/profile/download/";
   ADD_ADMIN_USER = "petrolink/admin/user";
-  DIRECT_PROFILE_GET   = "petrolink/directProfile";
+  DIRECT_PROFILES_GET   = "petrolink/directProfile";
+  DIRECT_PROFILE_GET   = "petrolink/directProfile/";
   DIRECT_PROFILE_DELETE   = "petrolink/directProfile";
   constructor(private httpClient:HttpClient) { }
 
@@ -47,12 +49,16 @@ export class CareerAdminService {
     return this.httpClient.get<any>(this.HOST_NAME+this.GET_APPLICATION+careerId);
   }
 
-  getDirectApplicants(){
-    return this.httpClient.get<any>(this.HOST_NAME+this.DIRECT_PROFILE_GET);
+  getDirectApplicant(profileId){
+    return this.httpClient.get<any>(this.HOST_NAME+this.DIRECT_PROFILE_GET+profileId);
   }
 
-  deleteDirectProfile(deleteJob){
-    return this.httpClient.delete<career>(this.HOST_NAME+this.DIRECT_PROFILE_DELETE+"/"+ deleteJob.id);
+  getDirectApplicants(){
+    return this.httpClient.get<any>(this.HOST_NAME+this.DIRECT_PROFILES_GET);
+  }
+
+  deleteDirectProfile(deleteJobId){
+    return this.httpClient.delete<career>(this.HOST_NAME+this.DIRECT_PROFILE_DELETE+"/"+ deleteJobId);
   }
 
   getResumeDownload(careerId,applicantId){
