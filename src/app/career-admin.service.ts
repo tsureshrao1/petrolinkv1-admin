@@ -8,8 +8,8 @@ import { career } from './model/career';
 })
 
 export class CareerAdminService {
-  //HOST_NAME = "http://167.99.153.42:8080/petrolinkboot/";
-  HOST_NAME = "http://localhost:9090/";
+  HOST_NAME = "http://167.99.153.42:8080/petrolinkboot/";
+  //HOST_NAME = "http://localhost:9090/";
   JOB_URL = "petrolink/career";
   JOB_URL_DEACTIVATED = "petrolink/career/deactive";
   LOGIN = "petrolink/admin/user/login";
