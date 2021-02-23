@@ -1,33 +1,191 @@
 <app-admin-header-nav></app-admin-header-nav>
-<div class="container pageDiv">
-    <h2 class="text-center">Add User</h2>
-    <form>
-        <p style="padding-top: 10px;color: red;" *ngIf="errorMessage != null">{{errorMessage}}</p>
-      <div class="form-group">
-        <p *ngIf="userNameMessage" style="color: red;">Minimum characters length should be 5*</p>
-        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">UserName*:</label>
-        <input type="text" [(ngModel)]="user.userName" placeholder="User Name" 
-        name="userName" class="form-control" id="userName">
-      </div>
-      <div class="form-group">
-        <p *ngIf="passwordMessage">Minimum characters length should be 5*</p>
-        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Password*:</label>
-        <input type="password" [(ngModel)]="user.password" placeholder="Password" 
-        name="password" class="form-control" id="password">
-      </div>
-      <!--<div class="form-group">
-        <p *ngIf="emailMessage">This email has an account already</p>
-        <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Email*:</label>
-        <input type="email" [(ngModel)]="user.email" placeholder="Email-Id" 
-        name="email" class="form-control" id="email" [email]="true">
-      </div>-->
-      <div class="row">
-        <div class="col-md-3">
-            <button class="btn btn-success col-md-12" (click)="createUser()">Add User</button>
+
+<div class="container-fluid pageDiv">
+  <h3 class="text-center">User Management</h3>
+  <div class="row">
+    <div class="col-md-10"></div>
+    <div class="col-md-2" style="padding: 0px 30px 0px 0px;">
+      <button class="btn btn-md btn-danger col-md-12" data-toggle="modal" data-target="#Modal_Add_User">Add
+        User</button> </div>
+  </div>
+  <div class="row table-responsive" style="padding-left: 15px; padding-top: 30px;">
+    <table class="table table-striped">
+      <thead class="">
+        <tr>
+          <th>Sl.No</th>
+          <th>User Name</th>
+          <th>Password</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList | paginate: config; let i = index">
+          <td>{{ (config.currentPage - 1) * config.itemsPerPage + i +1 }}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.password}}</td>
+          <td class="action">
+            <a class="red-tooltip" data-toggle="tooltip" title="EDIT" data-toggle="modal"
+              data-target="#Modal_Edit_User{{user.id}}" href="#Modal_Edit_User{{user.id}}"><i
+                class="fa fa-pencil-square-o" aria-hidden="true" title="Change Password"></i></a>
+            <a style="color: red;" data-toggle="modal" data-target="#UserdeleteConfirmation_{{user.id}}"
+              href="#UserdeleteConfirmation_{{user.id}}"><i class="fa fa-trash" aria-hidden="true"
+                title="Delete"></i></a>
+          </td>
+          <div class="modal fade" id="UserdeleteConfirmation_{{user.id}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">User Delete Confirmation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  While doing this below <i>Delete</i> option, will remove the User.
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+                  <button class="btn btn-success" (click)="removeModal(user.id)">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="Modal_Edit_User{{user.id}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="text-align: center !important;"> Edit User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="padding-top: 10px;">
+                  <form>
+                    <p style="padding-top: 0px;color: red;" *ngIf="errorMessage != null">{{errorMessage}}</p>
+                    <div class="form-group">
+                      <p *ngIf="userNameMessage" style="color: red;">Minimum characters length should be 5*</p>
+                      <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">UserName*:</label>
+                      <input type="text" [(ngModel)]="user.userName" placeholder="User Name" name="userName"
+                        class="form-control" id="userName" disabled>
+                    </div>
+                    <div class="form-group">
+                      <p *ngIf="passwordMessage">Minimum characters length should be 5*</p>
+                      <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Password*:</label>
+                      <input type="password" [(ngModel)]="user.password" placeholder="Password" name="password"
+                        class="form-control" id="password" disabled>
+                    </div>
+                    <div class="cp_line"> Change Password</div>
+                    <div class="form-group">
+                      <p *ngIf="passwordMessage">Minimum characters length should be 5*</p>
+                      <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">New Password*:</label>
+                      <input type="password" [(ngModel)]="user.newPassword" placeholder="New Password"
+                        name="newPassword" class="form-control" id="newPassword">
+                    </div>
+                    <div class="form-group">
+                      <p *ngIf="passwordMessage">Minimum characters length should be 5*</p>
+                      <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Confirm Password*:</label>
+                      <input type="password" [(ngModel)]="user.confirmPassword" placeholder="Confirm Password"
+                        name="confirmPassword" class="form-control" id="confirmPassword">
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button class="btn btn-success col-md-12" (click)="editUser(user)">Update</button>
+                      </div>
+                      <div class="col-md-12">
+                        <p class="col-md-12" *ngIf="message"
+                          style="padding-top: 10px;color: #dc3545;font-weight: bold;">{{message}}</p>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="modal fade" id="Modal_Add_User" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="text-align: center !important;"> Add User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="col-md-9">
-            <p class="col-md-9" *ngIf="message" style="padding-top: 10px;color: seagreen;font-weight: bold;">{{message}}</p>
+        <div class="modal-body" style="padding-top: 10px;">
+          <form>
+            <p style="padding-top: 0px;color: red;" *ngIf="errorMessage != null">{{errorMessage}}</p>
+            <div class="form-group">
+              <p *ngIf="userNameMessage" style="color: red;">Minimum characters length should be 5*</p>
+              <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">UserName*:</label>
+              <input type="text" [(ngModel)]="user.userName" placeholder="User Name" name="userName"
+                class="form-control" id="userName">
+            </div>
+            <div class="form-group">
+              <p *ngIf="passwordMessage">Minimum characters length should be 5*</p>
+              <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Password*:</label>
+              <input type="password" [(ngModel)]="user.password" placeholder="Password" name="password"
+                class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <p *ngIf="passwordMessage">Minimum characters length should be 5*</p>
+              <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Confirm Password*:</label>
+              <input type="password" placeholder="Confirm Password" name="password" class="form-control"
+                id="ConfirmPassword">
+            </div>
+            <!--<div class="form-group">
+                <p *ngIf="emailMessage">This email has an account already</p>
+                <label [ngClass]="{'errorInput' : errorMessage.length > 0}" for="role">Email*:</label>
+                <input type="email" [(ngModel)]="user.email" placeholder="Email-Id" 
+                name="email" class="form-control" id="email" [email]="true">
+              </div>-->
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-success col-md-12" (click)="createUser()">Add User</button>
+              </div>
+              <div class="col-md-9">
+                <p class="col-md-9" *ngIf="message" style="padding-top: 10px;color: seagreen;font-weight: bold;">
+                  {{message}}</p>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    </form>
+    </div>
+  </div>
+
+
+
+  <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+    <div class="custom-pagination">
+      <div class="pagination-previous" [class.disabled]="p.isFirstPage()" style="cursor: pointer;">
+        <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+          <i class="fa fa-backward"></i>
+        </span>
+      </div>
+      <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+        <span class="numberLabel" (click)="p.setCurrent(page.value)"
+          *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+        <div *ngIf="p.getCurrent() === page.value">
+          <span class="numberLabel">{{ page.label }}</span>
+        </div>
+      </div>
+      <div class="pagination-next" [class.disabled]="p.isLastPage()" style="cursor: pointer;">
+        <span *ngIf="!p.isLastPage()" (click)="p.next()">
+          <i class="fa fa-forward"></i>
+        </span>
+      </div>
+    </div>
+  </pagination-template>
+
+
 </div>

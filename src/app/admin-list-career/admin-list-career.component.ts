@@ -96,7 +96,7 @@ export class AdminListCareerComponent implements OnInit {
       }
     });
   }
-
+  
   updateCareer(career): void {
     console.log(career);
     if(career.jobDescription == '' || career.jobSummary == '' || career.role == '' || career.location == ''){
