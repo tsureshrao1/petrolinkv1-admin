@@ -10,9 +10,9 @@ import { user } from './admin-login/admin-login.component';
 
 export class CareerAdminService {
 //Test
-//HOST_NAME = "http://139.59.85.190/petrolinkboot/";
+HOST_NAME = "http://139.59.85.190:8090/petrolinkboot/";
 //Live
-HOST_NAME = "http://148.72.211.27/petrolinkboot/";
+//HOST_NAME = "http://148.72.211.27/petrolinkboot/";
 
   JOB_URL = "petrolink/career";
   JOB_URL_DEACTIVATED = "petrolink/career/deactive";
